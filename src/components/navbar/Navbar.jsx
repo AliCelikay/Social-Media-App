@@ -14,7 +14,7 @@ import { useContext } from 'react';
 
 const Navbar = () => {
     // destructuring toggle function from the DarkModeContext...
-    const {toggle} = useContext(DarkModeContext);
+    const {toggle, darkMode} = useContext(DarkModeContext);
 
     return (
         <div className="navbar">
@@ -24,7 +24,7 @@ const Navbar = () => {
                 </Link>
                 <HomeOutlinedIcon />
                 {/* ... and using the toggle function in the icon with onClick event */}
-                <DarkModeOutlinedIcon onClick={toggle} />
+                {darkMode ? <WbSunnyOutlinedIcon onClick={toggle}/> : <DarkModeOutlinedIcon onClick={toggle} />}
                 <GridViewOutlinedIcon />
                 <div className='search'>
                     <SearchOutlinedIcon />

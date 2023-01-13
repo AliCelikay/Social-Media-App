@@ -11,9 +11,11 @@ import Profile from "./pages/profile/Profile";
 
 import './style.scss';
 import { DarkModeContext } from "./context/darkModeContext";
+import { AuthContext } from "./context/authContext";
 
 function App() {
-  const currentUser = true;
+  // bringing in the useState from AuthContext
+  const {currentUser} = useContext(AuthContext);
 
   const {darkMode} = useContext(DarkModeContext);
 
