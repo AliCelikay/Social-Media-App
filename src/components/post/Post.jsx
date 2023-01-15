@@ -1,5 +1,5 @@
-import { useState } from 'react';
 import './post.scss'
+import { useState } from 'react';
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import FavoriteOutlinedIcon from "@mui/icons-material/FavoriteOutlined";
 import TextsmsOutlinedIcon from "@mui/icons-material/TextsmsOutlined";
@@ -14,7 +14,7 @@ const Post = ({ post }) => {
 
     //Temporary
     const liked = false;
-    
+
     return (
         <div className='post'>
             <div className="container">
@@ -22,33 +22,36 @@ const Post = ({ post }) => {
                     <div className="userInfo">
                         <img src={post.profilePic} alt="" />
                         <div className="details">
-                            <Link to={`/profile/${post.userId}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                                <span className='name'>{post.name}</span>
+                            <Link
+                                to={`/profile/${post.userId}`}
+                                style={{ textDecoration: "none", color: "inherit" }}
+                            >
+                                <span className="name">{post.name}</span>
                             </Link>
-                                <span className='date'>1 min ago</span>
+                            <span className="date">1 min ago</span>
                         </div>
                     </div>
                     <MoreHorizIcon />
                 </div>
                 <div className="content">
-                    <p>{post.description}</p>
+                    <p>{post.desc}</p>
                     <img src={post.img} alt="" />
                 </div>
                 <div className="info">
                     <div className="item">
-                        {liked ? <FavoriteOutlinedIcon/> : <FavoriteBorderOutlinedIcon/>}
+                        {liked ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon />}
                         12 likes
                     </div>
                     <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
-                        <TextsmsOutlinedIcon/>
+                        <TextsmsOutlinedIcon />
                         12 Comments
                     </div>
                     <div className="item">
-                        <ShareOutlinedIcon/>
+                        <ShareOutlinedIcon />
                         Share
                     </div>
                 </div>
-                {commentOpen && <Comments/>}
+                {commentOpen && <Comments />}
             </div>
         </div>
     )
