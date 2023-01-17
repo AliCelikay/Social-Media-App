@@ -51,11 +51,11 @@ export const login = (req, res) => {
 
         const token = jwt.sign({id:data[0].id}, 'secretkey');
 
-        const {password, ...others} = data[0];
-
+        const {password, ...info} = data[0];
+        console.log(password);
         res.cookie("accessToken", token, {
             httpOnly: true,
-        }).status(200).json()
+        }).status(200).json(info)
     });
 }
 
