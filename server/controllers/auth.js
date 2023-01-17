@@ -53,6 +53,7 @@ export const login = (req, res) => {
 
         const {password, ...info} = data[0];
         console.log(password);
+        // cookie name is accessToken
         res.cookie("accessToken", token, {
             httpOnly: true,
         }).status(200).json(info)
@@ -60,5 +61,8 @@ export const login = (req, res) => {
 }
 
 export const logout = (req, res) => {
-
+    res.clearCookie("accessToken", {
+        secure: true,
+        sameSite:"none"
+    }).status(200).json("User has been logged out")
 }
