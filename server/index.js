@@ -11,9 +11,16 @@ import cors from "cors";
 
 
 //middlewares
+// this code function is needed because we are using 'withCredentials: true' in login context in authContext.js, sending credentials/cookies to client side
+app.use((req,res,next) =>{
+    res.header("Access-Control-Allow-Credentials", true)
+    next();
+})
 // allows us to send json object from user input
 app.use(express.json());
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000",
+}));
 app.use(cookieParser());
 
 app.use("/api/auth", authRoutes);

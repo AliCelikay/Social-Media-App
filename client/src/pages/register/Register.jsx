@@ -10,7 +10,7 @@ const Register = () => {
         password:"",
         name:"",
     })
-    const [err, setErr] = useState(false);
+    const [err, setErr] = useState(null);
 
     //takes in change from the user input in register
     const handleChange = (e) =>{
@@ -23,12 +23,10 @@ const Register = () => {
         try{
             await axios.post("http://localhost:8800/api/auth/register", inputs)
         } catch(err){
-            setErr(true);
+            setErr(err.response.data);
         }
     }
 
-    console.log(err);
-    
     return (
         <div className='register' >
             <div className="card">
