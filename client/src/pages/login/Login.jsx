@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../../context/authContext';
 import './login.scss'
 
@@ -9,6 +9,8 @@ const Login = () => {
         password:"",
     })
     const [err, setErr] = useState(null);
+
+    const navigate = useNavigate();
 
     //takes in change from the user input in register
     const handleChange = (e) =>{
@@ -21,6 +23,7 @@ const Login = () => {
         e.preventDefault();
         try{
             await login(inputs);
+            navigate("/")
         }catch(err){
             setErr(err.response.data);
         }
