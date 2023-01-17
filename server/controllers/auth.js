@@ -21,7 +21,12 @@ export const register = (req, res) => {
 
         const q = "INSERT INTO users (`username`, `email`, `password`, `name`) VALUE (?)";
 
-        const values = [req.body.username,req.body.email, hashedPassword, req.body.name]
+        const values = [
+            req.body.username,
+            req.body.email, 
+            hashedPassword, 
+            req.body.name,
+        ]
         
         db.query(q, [values], (err, data) => {
             if(err) return res.status(500).json(err);
