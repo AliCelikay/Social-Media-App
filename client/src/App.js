@@ -12,34 +12,40 @@ import Profile from "./pages/profile/Profile";
 import './style.scss';
 import { DarkModeContext } from "./context/darkModeContext";
 import { AuthContext } from "./context/authContext";
+// importing react-query similar to useState
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+
 
 function App() {
   // bringing in the useState from AuthContext
-  const {currentUser} = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
-  const {darkMode} = useContext(DarkModeContext);
+  const { darkMode } = useContext(DarkModeContext);
+
+  const queryClient = new QueryClient();
 
   console.log(darkMode)
 
   const Layout = () => {
     return (
-      <div className={`theme-${darkMode ? "dark" : "light"}`}>
-        <Navbar/>
-        <div style={{ display: "flex"}}>
-          <LeftBar/>
-          <div style={{ flex: 6 }}>
-            <Outlet />
+      <QueryClientProvider>
+        <div className={`theme-${darkMode ? "dark" : "light"}`}>
+          <Navbar />
+          <div style={{ display: "flex" }}>
+            <LeftBar />
+            <div style={{ flex: 6 }}>
+              <Outlet />
+            </div>
+            <RightBar />
           </div>
-          <RightBar/>
-
         </div>
-      </div>
+      </QueryClientProvider>
     )
   }
 
-  const ProtectedRoute = ({children}) => {
-    if(!currentUser){
-      return <Navigate to="/login"/>
+  const ProtectedRoute = ({ children }) => {
+    if (!currentUser) {
+      return <Navigate to="/login" />
     }
 
     return children;
@@ -50,19 +56,19 @@ function App() {
       path: "/",
       element: (
         <ProtectedRoute>
-          <Layout/>
+          <Layout />
         </ProtectedRoute>
       ),
       children: [
         {
           path: "/",
-          element: <Home/>
+          element: <Home />
         },
         {
           path: "/profile/:id",
-          element: <Profile/>
+          element: <Profile />
         },
-        
+
       ]
     },
     {
@@ -74,7 +80,7 @@ function App() {
       element: <Register />
     }
   ]);
-  
+
   return (
     <div>
       <RouterProvider router={router} />
