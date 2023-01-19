@@ -12,7 +12,7 @@ const Posts = () => {
     })
   );
 
-    console.log(error);
+    console.log(data);
 
     return (
         <div className='posts'>
