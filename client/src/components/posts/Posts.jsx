@@ -6,21 +6,21 @@ import { makeRequest } from '../../axios';
 const Posts = () => {
 
     // query name is 'posts'
-    const { isLoading, error, data } = useQuery( ['posts'], () =>{
-
-        makeRequest.get("/posts").then(res => {
-            return res.data;
-        })
-
+    const { isLoading, error, data } = useQuery(["posts"], () =>
+    makeRequest.get("/posts").then((res) => {
+        return res.data;
     })
+  );
+
+    console.log(error);
 
     return (
         <div className='posts'>
-            {data.map(posts => (
+            {/* {data.map(posts => (
                 <Post post={posts} key={posts.id}/>
-            ))}
+            ))} */}
         </div>
-    )
-}
+    );
+};
 
-export default Posts
+export default Posts;
