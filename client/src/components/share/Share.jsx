@@ -13,9 +13,20 @@ import { makeRequest } from "../../axios";
 
 
 const Share = () => {
-
     const [file, setFile] = useState(null);
     const [desc, setDescription] = useState("");
+
+    const upload = async () => {
+        try {
+            // need FormData to send to api
+            const formData = new FormData();
+            formData.append("file", file)
+            const res = await makeRequest.post("/upload", formData);
+            return res.data;
+        } catch (err) {
+            console.log(err)
+        }
+    }
 
     const { currentUser } = useContext(AuthContext);
 
@@ -34,22 +45,30 @@ const Share = () => {
         }
     );
 
-    const handleClick = (e) => {
+    const handleClick = async (e) => {
         e.preventDefault();
-        mutation.mutate({ desc });
-        console.log(desc)
+        let imgUrl = "";
+        if (file) imgUrl = await upload();
+        mutation.mutate({ desc, img: imgUrl });
         setDescription("");
+        setFile(null);
     };
 
     return (
         <div className="share">
             <div className="container">
                 <div className="top">
-                    <img src={currentUser.profilePic} alt="" />
-                    <input type="text"
-                        placeholder={`What's on your mind ${currentUser.name}?`} onChange={(e) => setDescription(e.target.value)}
-                        value={desc}
-                    />
+                    <div className="left">
+                        <img src={currentUser.profilePic} alt="" />
+                        <input type="text"
+                            placeholder={`What's on your mind ${currentUser.name}?`} onChange={(e) => setDescription(e.target.value)}
+                            value={desc}
+                        />
+                    </div>
+                    <div className="right">
+                        {/* this is to show the image use has uploaded */}
+                        {file && <img className="file" alt="" src={URL.createObjectURL(file)}/>}
+                    </div>
                 </div>
                 <hr />
                 <div className="bottom">
