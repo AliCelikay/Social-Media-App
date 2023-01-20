@@ -10,8 +10,6 @@ import { makeRequest } from "../../axios";
 
 
 
-
-
 const Share = () => {
     const [file, setFile] = useState(null);
     const [desc, setDescription] = useState("");
@@ -30,6 +28,7 @@ const Share = () => {
 
     const { currentUser } = useContext(AuthContext);
 
+    // to refetch data
     const queryClient = useQueryClient();
 
     // using mutation to make api request
