@@ -26,7 +26,7 @@ const Comments = ({ postId }) => {
             {
                 onSuccess: () => {
                     // invalidate and refetch
-                    queryClient.invalidateQueries(["posts"]);
+                    queryClient.invalidateQueries(["comments"]);
                 },
             }
         );
@@ -51,7 +51,7 @@ const Comments = ({ postId }) => {
             </div>
             {isLoading ? "Loading..." : data.map((comment, index) => (
                 <div className="comment" key={index}>
-                    <img src={comment.profilePicture} alt="" />
+                    <img src={comment.profilePic} alt="" />
                     <div className="info">
                         <span>{comment.name}</span>
                         <p>{comment.desc}</p>
