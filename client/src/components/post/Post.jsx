@@ -8,13 +8,19 @@ import MoreHorizIcon from "@mui/icons-material/MoreHoriz";
 import { Link } from 'react-router-dom';
 import Comments from '../comments/Comments';
 import moment from 'moment';
+import { useQuery } from '@tanstack/react-query';
+import { makeRequest } from '../../axios';
 
 
 const Post = ({ post }) => {
     const [commentOpen, setCommentOpen] = useState(false);
 
-    //Temporary
-    const liked = false;
+    const { isLoading, error, data } = useQuery(["likes", post.id], () =>
+        makeRequest.get("/likes?postId=" + post.id).then((res) => {
+            return res.data;
+        })
+    );
+        console.log(data)
 
     return (
         <div className='post'>
@@ -40,8 +46,8 @@ const Post = ({ post }) => {
                 </div>
                 <div className="info">
                     <div className="item">
-                        {liked ? <FavoriteOutlinedIcon /> : <FavoriteBorderOutlinedIcon />}
-                        12 likes
+                        {/* {data ? <FavoriteOutlinedIcon  /> : <FavoriteBorderOutlinedIcon />} */}
+                        {data?.length} likes
                     </div>
                     <div className="item" onClick={() => setCommentOpen(!commentOpen)}>
                         <TextsmsOutlinedIcon />
