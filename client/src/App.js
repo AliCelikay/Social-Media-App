@@ -24,8 +24,6 @@ function App() {
 
   const queryClient = new QueryClient();
 
-  console.log(darkMode)
-
   const Layout = () => {
     return (
       <QueryClientProvider client={queryClient}>
