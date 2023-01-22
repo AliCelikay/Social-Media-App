@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import moment from "moment";
 
 export const getPosts = (req, res) => {
+    const userId = req.query.userId
     // grabbing token from cookies 
     const token = req.cookies.accessToken;
 
@@ -14,13 +15,20 @@ export const getPosts = (req, res) => {
         if (err) return res.status(403).json("Token is not valid!")
 
         //if token is correct the userInfo will be sent
+        
+        const q = userId ? `SELECT p.*, u.id AS userId, name, profilePic FROM posts AS p JOIN users AS u ON (u.id = p.userId) WHERE p.userId = ?` 
+        
+            :
+            
         // grabbing friends posts and users posts
         // posts table also has an id so to not be confused we name u.id to userId
-        const q = `SELECT p.*, u.id AS userId, name, profilePic FROM posts AS p JOIN users AS u ON (u.id = p.userId) LEFT JOIN relationships AS r ON (p.userId = r.followedUserId) WHERE  r.followerUserId = ? OR p.userId = ? ORDER BY p.createdAt DESC`
+        `SELECT p.*, u.id AS userId, name, profilePic FROM posts AS p JOIN users AS u ON (u.id = p.userId) LEFT JOIN relationships AS r ON (p.userId = r.followedUserId) WHERE  r.followerUserId = ? OR p.userId = ? ORDER BY p.createdAt DESC`
         // r.followerUserId is users id and will fetch all relationships that belong to the user, r.followedUserId is the friend and selects only friends posts 
 
-        // in auth.js in server>controller we saved a token with object id key and now we can use it to get the value
-        db.query(q, [userInfo.id, userInfo.id], (err, data) => {
+        const values = userId ? [userId] : [userInfo.id, userInfo.id];
+
+        // in auth.js in server>controller we saved a token with object id key and now we can use it to get the value        
+        db.query(q, values, (err, data) => {
             if (err) return res.status(500).json(err);
             return res.status(200).json(data);
         });
