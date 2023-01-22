@@ -15,7 +15,6 @@ export const getPosts = (req, res) => {
         if (err) return res.status(403).json("Token is not valid!")
 
         //if token is correct the userInfo will be sent
-        
         const q = userId ? `SELECT p.*, u.id AS userId, name, profilePic FROM posts AS p JOIN users AS u ON (u.id = p.userId) WHERE p.userId = ?` 
         
             :

@@ -9,7 +9,7 @@ import LanguageIcon from "@mui/icons-material/Language";
 import EmailOutlinedIcon from "@mui/icons-material/EmailOutlined";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Posts from "../../components/posts/Posts";
-import { useQuery, useQueryClient, useMutation, Mutation } from '@tanstack/react-query';
+import { useQuery, useQueryClient, useMutation } from '@tanstack/react-query';
 import { makeRequest } from '../../axios';
 import { useLocation } from 'react-router-dom';
 import { useContext, useState } from 'react';
@@ -113,7 +113,7 @@ const Profile = () => {
           </div>
         </>
       )}
-      {openUpdate && <Update setOpenUpdate={setOpenUpdate} />}
+      {openUpdate && <Update setOpenUpdate={setOpenUpdate} user={data} />}
     </div>
   )
 }

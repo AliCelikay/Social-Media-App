@@ -14,6 +14,7 @@ const Share = () => {
     const [file, setFile] = useState(null);
     const [desc, setDescription] = useState("");
 
+    //code to upload file
     const upload = async () => {
         try {
             // need FormData to send to api
