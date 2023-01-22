@@ -26,22 +26,23 @@ const Post = ({ post }) => {
     // to refetch data
     const queryClient = useQueryClient();
 
-    const mutation = useMutation((liked) => {
-        // if its liked we will delete our liked
-        if(liked) return makeRequest.delete("/likes?postId =" + post.id);
-        return makeRequest.post("/likes", {postId: post.id});
-    },
+    const mutation = useMutation(
+        (liked) => {
+            // if its liked we will delete our liked
+            if (liked) return makeRequest.delete("/likes?postId=" + post.id);
+            return makeRequest.post("/likes", { postId: post.id });
+        },
         {
             onSuccess: () => {
-                // invalidate and refetch
+                // Invalidate and refetch
                 queryClient.invalidateQueries(["likes"]);
             },
         }
     );
 
     const handleLike = () => {
-        mutation.mutate(data.includes(currentUser.id))
-    }
+        mutation.mutate(data.includes(currentUser.id));
+    };
 
     return (
         <div className='post'>
