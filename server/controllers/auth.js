@@ -1,5 +1,5 @@
 // require('dotenv').config();
-import { db } from "../connect.js";
+import { db } from "../config/connect.js";
 // for hashing password
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
