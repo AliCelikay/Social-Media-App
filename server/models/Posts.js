@@ -1,9 +1,9 @@
-const { Sequilize, Model, DataTypes } = require('sequelize');
-const sequilize = require('../config/connection');
+const { Sequelize, Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
-class Comments extends Model{};
+class Posts extends Model {}
 
-Comments.init(
+Posts.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -14,24 +14,19 @@ Comments.init(
         },
         desc: {
             type: DataTypes.VARCHAR(200),
-            allowNull: false,
         },
-        createdAt: {
-            type: DataTypes.DATETIME,
+        img: {
+            type: DataTypes.VARCHAR(200),
         },
         userId: {
             type: DataTypes.INTEGER,
             allowNull: false,
         },
-        postId: {
-            type: DataTypes.INTEGER,
-            allowNull: false,
+        createdAt: {
+            type: DataTypes.DATETIME,
         }
     },
     {
         sequelize
     }
-);
-
-
-module.exports = Comments;
+)

@@ -70,3 +70,6 @@ User.init(
         modelName: 'Users'
       }
 );
+
+
+module.exports = User;

@@ -1,9 +1,9 @@
-const { Sequilize, Model, DataTypes } = require('sequelize');
-const sequilize = require('../config/connection');
+const { Sequelize, Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
-class Comments extends Model{};
+class Likes extends Model {}
 
-Comments.init(
+Likes.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,13 +11,6 @@ Comments.init(
             unique: true,
             autoIncrement: true,
             primaryKey: true,
-        },
-        desc: {
-            type: DataTypes.VARCHAR(200),
-            allowNull: false,
-        },
-        createdAt: {
-            type: DataTypes.DATETIME,
         },
         userId: {
             type: DataTypes.INTEGER,
@@ -34,4 +27,4 @@ Comments.init(
 );
 
 
-module.exports = Comments;
+module.exports = Likes;
