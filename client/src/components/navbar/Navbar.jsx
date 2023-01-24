@@ -18,17 +18,17 @@ const Navbar = () => {
     const {toggle, darkMode} = useContext(DarkModeContext);
 
     const {currentUser} = useContext(AuthContext);
-
+    // console.log(currentUser);
     return (
         <div className="navbar">
             <div className='left'>
                 <Link to="/" style={{ textDecoration: 'none' }}>
                     <span>AliSocial</span>
                 </Link>
-                <HomeOutlinedIcon />
+                {/* <HomeOutlinedIcon /> */}
                 {/* ... and using the toggle function in the icon with onClick event */}
                 {darkMode ? <WbSunnyOutlinedIcon onClick={toggle}/> : <DarkModeOutlinedIcon onClick={toggle} />}
-                <GridViewOutlinedIcon />
+                {/* <GridViewOutlinedIcon /> */}
                 <div className='search'>
                     <SearchOutlinedIcon />
                     <input type="text" placeholder="Search..." />
@@ -40,7 +40,7 @@ const Navbar = () => {
                 <EmailOutlinedIcon />
                 <NotificationsOutlinedIcon />
                 <div className="user">
-                    <img src={currentUser.profilePic} alt="" />
+                    <img src={"/upload/"+ currentUser.profilePic} alt="" />
                     <span>{currentUser.name}</span>
                 </div>
             </div>

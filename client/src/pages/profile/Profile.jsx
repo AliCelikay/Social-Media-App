@@ -96,7 +96,7 @@ const Profile = () => {
                     <span>{data.name}</span>
                   </div>
                 </div>
-                {relationshipIsLoading ? "Loading..." : userId === currentUser.id ? (<button onClick={() => setOpenUpdate(true)}>Update</button>) :
+                {relationshipIsLoading ? "Loading..." : userId === data.id ? (<button onClick={() => setOpenUpdate(true)}>Update</button>) :
                   <button
                     onClick={handleFollow}
                   >

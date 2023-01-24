@@ -6,7 +6,7 @@ export const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
     const [currentUser, setCurrentUser] = useState(
         // checks if there's a user in local storage, and takes string and tranforms it into an object
-        JSON.parse(localStorage.getItem("user")) || null)
+        JSON.parse(localStorage.getItem("user")) || null);
 
     const login = async (inputs) => {
         // TO DO
@@ -26,8 +26,8 @@ export const AuthContextProvider = ({ children }) => {
     }, [currentUser])
 
     return (
-        <AuthContext.Provider value={{ currentUser, login }}>
+        <AuthContext.Provider value={{ currentUser, setCurrentUser, login }}>
             {children}
         </AuthContext.Provider>
-    )
+    );
 };

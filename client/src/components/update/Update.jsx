@@ -1,10 +1,12 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { makeRequest } from '../../axios';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import './update.scss';
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { AuthContext } from '../../context/authContext';
 
 const Update = ({ setOpenUpdate, user }) => {
+  const {setCurrentUser} = useContext(AuthContext);
   const [cover, setCover] = useState(null)
   const [profile, setProfile] = useState(null)
   const [texts, setTexts] = useState({
@@ -57,12 +59,26 @@ const Update = ({ setOpenUpdate, user }) => {
     // if file exists we will await for the new file and will return new url, if no new url we will use previous pictures
     coverUrl = cover ? await upload(cover) : user.coverPic;
     profileUrl = profile ? await upload(profile) : user.profilePic;
-
+    setCurrentUser({ ...texts, coverPic: coverUrl, profilePic: profileUrl })
     mutation.mutate({ ...texts, coverPic: coverUrl, profilePic: profileUrl });
     setOpenUpdate(false);
     setCover(null);
     setProfile(null);
   };
+
+  // const handleClick = async (e) => {
+  //   e.preventDefault();
+
+  //   let coverUrl;
+  //   let profileUrl;
+  //   coverUrl = cover ? await upload(cover) : user.coverPic;
+  //   profileUrl = profile ? await upload(profile) : user.profilePic;
+    
+  //   mutation.mutate({ ...texts, coverPic: coverUrl, profilePic: profileUrl });
+  //   setOpenUpdate(false);
+  //   setCover(null);
+  //   setProfile(null);
+  // }
 
   return (
     <div className="update">
@@ -156,5 +172,4 @@ const Update = ({ setOpenUpdate, user }) => {
   );
 };
 
-
-export default Update
+export default Update;
