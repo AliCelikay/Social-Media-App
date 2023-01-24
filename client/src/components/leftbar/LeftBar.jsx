@@ -14,20 +14,21 @@ import Courses from "../../assets/12.png";
 import Fund from "../../assets/13.png";
 import { AuthContext } from '../../context/authContext';
 import { useContext } from 'react';
+import { makeRequest } from '../../axios';
+import { useQuery } from '@tanstack/react-query';
 
 const LeftBar = () => {
 
-    const {currentUser} = useContext(AuthContext);
+    const { currentUser } = useContext(AuthContext);
 
-    
     return (
         <div className='leftBar'>
             <div className="container">
                 <div className="menu">
-                    <div className="user">
-                        <img src={currentUser.profilePic} alt="" />
+                    {/* <div className="user">
+                        <img src={"/upload/" + currentUser.profilePic} alt="" />
                         <span>{currentUser.name}</span>
-                    </div>
+                    </div> */}
                     <div className="item">
                         <img src={Friends} alt="" />
                         <span>Friends</span>

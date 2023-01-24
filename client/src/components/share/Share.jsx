@@ -9,7 +9,6 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { makeRequest } from "../../axios";
 
 
-
 const Share = () => {
     const [file, setFile] = useState(null);
     const [desc, setDescription] = useState("");
@@ -59,7 +58,7 @@ const Share = () => {
             <div className="container">
                 <div className="top">
                     <div className="left">
-                        <img src={currentUser.profilePic} alt="" />
+                        <img src={"/upload/"+ currentUser.profilePic} alt="" />
                         <input type="text"
                             placeholder={`What's on your mind ${currentUser.name}?`} onChange={(e) => setDescription(e.target.value)}
                             value={desc}
@@ -80,6 +79,7 @@ const Share = () => {
                             // files[0] = uploading a single file
                             onChange={(e) => setFile(e.target.files[0])}
                         />
+                        {/* adding a file from user computer */}
                         <label htmlFor="file">
                             <div className="item">
                                 <img src={Image} alt="" />
